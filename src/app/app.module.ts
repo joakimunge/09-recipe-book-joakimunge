@@ -1,26 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
 
 import { RecipeService } from './recipe.service';
 
 import { AppComponent } from './app.component';
 import { RecipesComponent } from './recipes/recipes.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecipesComponent
+    RecipesComponent,
+    RecipeDetailComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-		  InMemoryDataService, { dataEncapsulation: false }
-		)
+    AppRoutingModule
   ],
   providers: [
   	RecipeService
