@@ -1,0 +1,14 @@
+<div id="search-component">
+  <h4>Recipe Search</h4>
+
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  <div *ngIf="recipes$">
+  	<ul class="search-result">
+    <li *ngFor="let recipe of recipes$ | async" >
+      <a routerLink="/recipe/{{recipe.id}}">
+        {{recipe.title}}
+      </a>
+    </li>
+  </ul>
+  </div>
+</div>
