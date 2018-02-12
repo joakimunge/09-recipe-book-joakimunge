@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
-
 import { Recipe } from '../recipe.model';
 
 @Component({
@@ -20,7 +19,10 @@ export class RecipesComponent implements OnInit {
 
   getRecipes(): void {
   	this.recipeService.getRecipes()
-  		.subscribe(recipes => this.recipes = recipes);
+  		.subscribe(recipes => {
+        this.recipes = recipes['matches'].map(recipe => new Recipe(recipe.id, recipe.imageUrlsBySize, recipe.recipeName));
+        console.log(this.recipes)
+      });
   }
 
 }

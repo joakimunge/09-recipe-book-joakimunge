@@ -1,9 +1,8 @@
 <div>
 	<ul>
 	    <li *ngFor="let recipe of recipes">
-	    	{{recipe.id}}
-	    	{{recipe.title}}
-	    	<img src={{recipe.image}} alt="">
+	    	<a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a>
+	    	<img src={{recipe.image[90]}} alt="">
 	    </li>
 	</ul>
 </div>
