@@ -1,3 +1,11 @@
-<pre>
-{{recipe}}
-</pre>
+<div *ngIf="recipe">
+	<p>{{recipe.id}}</p>
+	<p>{{recipe.title}}</p>
+	<p>{{recipe.image}}</p>
+	<p>{{recipe.ingredients}}</p>
+	<p>{{recipe.source}}</p>
+	<p>{{recipe.servings}}</p>
+	<p>{{recipe.totalTime}}</p>
+	<p>{{recipe.rating}}</p>
+</div>
+<button (click)="goBack()">Back</button>
