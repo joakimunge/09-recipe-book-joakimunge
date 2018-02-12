@@ -1,3 +1,9 @@
-<p>
-  recipes works!
-</p>
+<div>
+	<ul>
+	    <li *ngFor="let recipe of recipes">
+	    	{{recipe.id}}
+	    	{{recipe.title}}
+	    	<img src={{recipe.image}} alt="">
+	    </li>
+	</ul>
+</div>
