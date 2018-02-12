@@ -1,15 +1,15 @@
 export class Recipe {
-	constructor
-	(
-		id,
-		title,
-		image
-	) 
+  public id: number;
+  public image: string;
+  public title: string;
 
-	{
-		this.id = id;
-		this.title = title;
-		this.image = image;
-	}
-
+  constructor(
+    id: number,
+    image: string,
+    title: string,
+  ) {
+    this.id = id;
+    this.image = image;
+    this.title = title;
+  }
 }
