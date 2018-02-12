@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { RecipeService } from '../recipe.service';
@@ -11,7 +11,8 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeDetailComponent implements OnInit {
 
-	@Input() recipe: Recipe;
+  recipe: Recipe;
+  recipeJson: string;
 
   constructor(
   	private recipeService: RecipeService,
@@ -26,7 +27,24 @@ export class RecipeDetailComponent implements OnInit {
   getRecipe(): void {
   	const id = this.route.snapshot.paramMap.get('id');
   	this.recipeService.getRecipe(id)
-  		.subscribe(recipe => this.recipe = JSON.stringify(recipe, null, 2));
+  		.subscribe(res => {
+        this.recipeJson = JSON.stringify(res, null, 2)
+        this.recipe = new Recipe(
+          res.id, 
+          res['images'][0]['hostedMediumUrl'], 
+          res['name'],
+          res['ingredientLines'],
+          res.source,
+          res['numberOfServings'],
+          res.totalTime,
+          res.rating
+          )
+        console.log(this.recipe);
+      });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }
