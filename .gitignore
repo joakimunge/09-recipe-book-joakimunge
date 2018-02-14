@@ -41,3 +41,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Api / Lumen
+/api/vendor
+/api/.idea
+/api/Homestead.json
+/api/Homestead.yaml
+/api/.env
+
