@@ -38,7 +38,9 @@ export class RecipeService {
     if (!term.trim()) {
       return of([]);
     }
-    return this.http.get<Recipe[]>(this.searchUrl + term).pipe(
+    const data = this.http.get<Recipe[]>(this.searchUrl + term);
+    console.log(data['matches'])
+    return data.pipe(
       catchError(this.errorHandler<Recipe[]>('searchHeroes', []))
     );
   }
