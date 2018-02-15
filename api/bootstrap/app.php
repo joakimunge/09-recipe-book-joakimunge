@@ -63,9 +63,9 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+   \Neomerx\CorsIlluminate\CorsMiddleware::class,
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
@@ -85,6 +85,7 @@ $app->routeMiddleware([
 // $app->register(App\Providers\AppServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Irazasyed\JwtAuthGuard\JwtAuthGuardServiceProvider::class);
+$app->register(\Neomerx\CorsIlluminate\Providers\LumenServiceProvider::class);
 
 // $app->register(App\Providers\EventServiceProvider::class);
 
