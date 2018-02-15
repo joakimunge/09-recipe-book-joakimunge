@@ -13,11 +13,11 @@ class CreateListRecipeTable extends Migration
      */
     public function up()
     {
-      Schema::create('list_recipe', function(Blueprint $table)
+      Schema::create('recipelist_recipe', function(Blueprint $table)
       {
-          $table->integer('list_id')->unsigned();
-          $table->foreign('list_id')->references('id')
-                ->on('lists')->onDelete('cascade');
+          $table->integer('recipelist_id')->unsigned();
+          $table->foreign('recipelist_id')->references('id')
+                ->on('recipelists')->onDelete('cascade');
 
           $table->integer('recipe_id')->unsigned();
           $table->foreign('recipe_id')->references('id')
@@ -34,6 +34,6 @@ class CreateListRecipeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('list_recipe');
+        Schema::dropIfExists('recipelist_recipe');
     }
 }

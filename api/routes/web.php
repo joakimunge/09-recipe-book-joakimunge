@@ -16,10 +16,17 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+//Auth
 $router->post('/auth/login', 'AuthController@login');
 $router->post('/auth/register', 'AuthController@register');
 $router->get('/auth/whoami', 'AuthController@getUser');
+
+//Recipes
 $router->get('/recipes', 'RecipeController@index');
+
+//Lists
+$router->post('/lists/create', 'RecipeListController@store');
+$router->get('/lists', 'RecipeListController@index');
 
 $router->group(['middleware' => 'auth:api'], function($router)
 {
