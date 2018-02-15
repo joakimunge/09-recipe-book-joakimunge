@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +12,31 @@ export class LoginComponent implements OnInit {
   model: any = {};
 	submitted = false;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    if(this.auth.isUserLoggedin()) {
+      this.router.navigate(['/recipes']);
+    }
   }
 
 	onSubmit() {
 		this.submitted = true;
-		console.log(this.model)
 		this.auth.login(this.model.email, this.model.password)
-      .subscribe(user => console.log(user));
+      .subscribe(
+        res => {
+          this.router.navigate(['/recipes']);
+        },
+        error => {
+          console.error(error);
+        }
+    );
+
 	}
 
-  get diagnostic() { return JSON.stringify(this.model); }
+  logout() {
+    this.auth.logout();
+  }
+
 
 }
