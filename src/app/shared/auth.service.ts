@@ -8,6 +8,12 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 
 @Injectable()
 export class AuthService {
@@ -21,7 +27,7 @@ export class AuthService {
   login(email: string, password: string) {
   	return this.http.post<any>('http://dev.manchildman.com/auth/login', {email: email, password: password}).pipe(
 	  		map(user => {
-	  			if (user && user.data.access_token) {
+	  			if (user && user.token) {
 	  				localStorage.setItem('currentUser', JSON.stringify(user))
 	  			}
 
