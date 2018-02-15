@@ -52,4 +52,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return [];
     }
+
+        public function lists() {
+        return $this->hasMany('App\List')
+        ->withTimestamps();
+    }
 }
