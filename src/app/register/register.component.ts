@@ -19,7 +19,8 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
   	this.submitted = true;
   	console.log(this.model.email);
-  	this.auth.register(this.model.email, this.model.password);
+  	this.auth.register(this.model.email, this.model.password)
+      .subscribe(res => console.log(res);
   }
 
    get diagnostic() { return JSON.stringify(this.model); }

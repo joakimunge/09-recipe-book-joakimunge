@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
 	onSubmit() {
 		this.submitted = true;
 		console.log(this.model)
-		this.auth.login(this.model.email, this.model.password);
+		this.auth.login(this.model.email, this.model.password)
+      .subscribe(user => console.log(user));
 	}
 
   get diagnostic() { return JSON.stringify(this.model); }
