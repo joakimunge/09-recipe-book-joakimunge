@@ -1,5 +1,11 @@
 <nav>
+	<div *ngIf="!this.auth.isUserLoggedin()">
 	<button routerLink="/login">Login</button>
 	<button routerLink="/register">Sign up</button>
+	</div>
+	<div *ngIf="this.auth.isUserLoggedin()">
+		<button (click)="logout()">Log out</button>
+		<button (click)="this.auth.getUser()">USER INFO</button>
+	</div>
 </nav>
 <router-outlet></router-outlet>
