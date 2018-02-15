@@ -38,7 +38,7 @@ class AuthController extends Controller
         return response()->json($this->jwt->auth()->user());
     }
 
-    public function postLogin(Request $request)
+    public function login(Request $request)
     {
         $this->validate($request, [
             'email'    => 'required|email|max:255',
@@ -67,4 +67,10 @@ class AuthController extends Controller
 
         return response()->json(compact('token'));
     }
+
+    // protected function returnToken($token) {
+    //     return response()->json([
+    //         'data' => compact('token')
+    //     ])
+    // }
 }
