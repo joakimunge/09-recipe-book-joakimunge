@@ -34,7 +34,7 @@ class AuthController extends Controller
     }
 
     public function getUser() {
-        dd($this->jwt);
+        dd($this->jwt->user()); // Look into why this doesnt work. CORS?!?!
         return response()->json($this->jwt->auth()->user());
     }
 
