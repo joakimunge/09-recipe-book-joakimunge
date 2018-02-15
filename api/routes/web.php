@@ -16,9 +16,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->post('/auth/login', 'AuthController@postLogin');
+$router->post('/auth/login', 'AuthController@login');
 $router->post('/auth/register', 'AuthController@register');
 $router->get('/auth/whoami', 'AuthController@getUser');
+$router->get('/recipes', 'RecipeController@index');
 
 $router->group(['middleware' => 'auth:api'], function($router)
 {
