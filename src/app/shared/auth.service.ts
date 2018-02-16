@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
+    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('currentUser')).access_token}`
   })
 };
 
@@ -25,9 +25,9 @@ export class AuthService {
   ) { }
 
   login(email: string, password: string) {
-  	return this.http.post<any>('http://dev.manchildman.com/auth/login', {email: email, password: password}).pipe(
+  	return this.http.post<any>('http://dev.manchildman.com/login', {email: email, password: password}).pipe(
 	  		map(user => {
-	  			if (user && user.token) {
+	  			if (user && user.access_token) {
 	  				localStorage.setItem('currentUser', JSON.stringify(user))
 	  			}
 
@@ -42,21 +42,20 @@ export class AuthService {
   }
 
   register(email: string, password: string) {
-  	return this.http.post<any>('http://dev.manchildman.com/auth/register', {email: email, password: password});
+  	return this.http.post<any>('http://dev.manchildman.com/register', {email: email, password: password});
   }
 
   isUserLoggedin() {
-    const user = localStorage.getItem('currentUser');
-
-    if (user && !this.jwtHelper.isTokenExpired(user)) {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user && !this.jwtHelper.isTokenExpired(user.access_token)) {
       return true;
     } else {
       return false;
     }
   }
 
-  getUser() { //Why doesn't this work with CORS but the other methods do?
-    return this.http.get<any>('http://dev.manchildman.com/lists')
+  getUser() {
+    return this.http.get<any>('http://dev.manchildman.com/lists', httpOptions)
       .subscribe(user => console.log(user));
   }
 
