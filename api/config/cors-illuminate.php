@@ -26,7 +26,7 @@ return [
      * Environment variables could be used for enabling/disabling certain hosts.
      */
     S::KEY_ALLOWED_ORIGINS => [
-        'http://localhost:4200'         => true,
+        'http://localhost:4200' => true,
         'http://some.disabled.com' => null,
         // Enabling all origins might be insecure. Consider before using in production.
         S::VALUE_ALLOW_ORIGIN_ALL  => true,
@@ -69,6 +69,7 @@ return [
     S::KEY_ALLOWED_HEADERS => [
         'content-type'             => true,
         'x-custom-request-header'  => true,
+        'Authorization'  => true,
         // Enabling all headers might be insecure. Not recommended to use in production.
         S::VALUE_ALLOW_ALL_HEADERS => true,
     ],
