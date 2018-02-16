@@ -3,6 +3,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { ListsComponent } from './lists/lists.component';
+import { ListDetailComponent } from './list-detail/list-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
@@ -10,7 +12,12 @@ const routes: Routes = [
 	{ path: 'recipes', component: RecipesComponent },
 	{ path: 'recipe/:id', component: RecipeDetailComponent},
 	{ path: 'login', component: LoginComponent},
-	{ path: 'register', component: RegisterComponent}
+	{ path: 'register', component: RegisterComponent},
+	{ path: 'lists', component: ListsComponent},
+	{ path: 'list/:id', component: ListDetailComponent},
+
+
+
 
 
 ]

@@ -8,12 +8,16 @@ import { RecipeService } from './recipe.service';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './shared/auth.service';
+import { RegisterComponent } from './register/register.component';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { RegisterComponent } from './register/register.component';
+import { ListsComponent } from './lists/lists.component';
+import { ListService } from './shared/services/list.service';
+import { ListDetailComponent } from './list-detail/list-detail.component';
 
 
 @NgModule({
@@ -23,7 +27,9 @@ import { RegisterComponent } from './register/register.component';
     RecipeDetailComponent,
     RecipeSearchComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ListsComponent,
+    ListDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,8 @@ import { RegisterComponent } from './register/register.component';
   ],
   providers: [
   	RecipeService,
-    AuthService
+    AuthService,
+    ListService
   ],
   bootstrap: [AppComponent]
 })
