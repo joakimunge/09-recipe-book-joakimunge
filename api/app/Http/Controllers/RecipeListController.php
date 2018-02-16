@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Tymon\JWTAuth\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,28 +10,19 @@ use App\User;
 
 class RecipeListController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(JWTAuth $jwt)
-    {
-        $this->jwt = $jwt;
-    }
-
     public function index() 
     {
-        // $token = $this->jwt->attempt($request->only('email', 'password'))
-        // $token = auth()->attempt($credentials);
-        dd($this->jwt->user());
+        // We don't know the user here
+        return response([
+            'data' => Auth::user()
+        ]);
     }
 
     public function store(Request $request) {
         $list = new RecipeList;
-
+        $user = Auth::user();
         $list->name = $request->name;
-        $list->user_id = $request->
+        $list->user_id = user->id;
         $list->save();
     }
 
