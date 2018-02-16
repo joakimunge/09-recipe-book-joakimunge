@@ -14,7 +14,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-  	this.auth.isUserLoggedin();
+  	// this.auth.isUserLoggedin();
   }
 
   logout() {
