@@ -21,9 +21,11 @@ $router->get('/', function () use ($router) {
 $router->get('/recipes', 'RecipeController@index');
 
 //Lists
-$router->post('/lists/create', 'RecipeListController@store');
+$router->post('/lists/add', 'RecipeListController@store');
+// $router->get('/lists/{list}', 'RecipeListController@show');
 
 Route::get('lists', 'RecipeListController@index');
+Route::get('lists/{list}', 'RecipeListController@show');
 
 Route::post('login', 'AuthController@login');
 Route::post('register', 'AuthController@register');

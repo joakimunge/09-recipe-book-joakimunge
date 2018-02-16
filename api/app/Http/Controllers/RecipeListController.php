@@ -10,11 +10,19 @@ use App\User;
 
 class RecipeListController extends Controller
 {
-    public function index() 
-    {
-        // We don't know the user here
+
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['show']]);
+    }
+
+    public function index() {
+        $user = Auth::user();
+        $lists = RecipeList::where('user_id', '=', $user->id)->get();
+
         return response([
-            'data' => Auth::user()
+            'status' => 'success',
+            'user' => Auth::user(),
+            'lists' => $lists
         ]);
     }
 
@@ -22,9 +30,18 @@ class RecipeListController extends Controller
         $list = new RecipeList;
         $user = Auth::user();
         $list->name = $request->name;
-        $list->user_id = user->id;
+        $list->user_id = $user->id;
         $list->save();
     }
 
-    //
+    public function show(Request $request, $id) {
+
+        $list = RecipeList::find($id);
+
+        return response([
+            'status' => 'success',
+            'user' => Auth::user(),
+            'list' => $list
+        ]);
+    }
 }
