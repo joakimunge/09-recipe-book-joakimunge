@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const httpOptions = {
+const httpOptions = { // Fix this so we dont try to set auth-bearer-token when logged out
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('currentUser')).access_token}`
@@ -22,7 +22,8 @@ export class AuthService {
   	private http: HttpClient,
   	private jwtHelper: JwtHelperService,
   	private router: Router
-  ) { }
+  ) { 
+  }
 
   login(email: string, password: string) {
   	return this.http.post<any>('http://dev.manchildman.com/login', {email: email, password: password}).pipe(

@@ -27,7 +27,6 @@ export class RecipesComponent implements OnInit {
             recipe.recipeName
             )
           );
-        console.log(this.recipes)
       });
   }
 
