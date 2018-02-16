@@ -2,6 +2,20 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
 
+# Todo:
+
+## Move api calls to backend
+- Create service provider
+- Make resource route
+- Make resource controller
+- Guzzle
+
+## Authguard
+- Make auth guard (CanActivate, isLoggedIn etc.)
+
+## HttpHeaders
+- refactor HttpHeaders
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
