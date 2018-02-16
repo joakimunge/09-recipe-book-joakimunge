@@ -2,22 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Tymon\JWTAuth\JWTAuth;
 use App\User;
 
 class AuthController extends Controller
 {
-    /**
-     * @var \Tymon\JWTAuth\JWTAuth
-     */
-    protected $jwt;
-
-    public function __construct(JWTAuth $jwt)
+    
+    public function __construct()
     {
-        $this->jwt = $jwt;
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     public function register(Request $request) {
@@ -34,8 +29,7 @@ class AuthController extends Controller
     }
 
     public function getUser() {
-        dd($this->jwt->user()); // Look into why this doesnt work. CORS?!?!
-        return response()->json($this->jwt->auth()->user());
+        return response()->json(Auth::user());
     }
 
     public function login(Request $request)
@@ -45,32 +39,41 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        try {
-
-            if (! $token = $this->jwt->attempt($request->only('email', 'password'))) {
-                return response()->json(['user_not_found'], 404);
-            }
-
-        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-
-            return response()->json(['token_expired'], 500);
-
-        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-
-            return response()->json(['token_invalid'], 500);
-
-        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
-
-            return response()->json(['token_absent' => $e->getMessage()], 500);
-
+        if (! $token = Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return response()->json(compact('token'));
+        return $this->respondWithToken($token);
+        // try {
+
+        //     if (! $token = $this->jwt->attempt($request->only('email', 'password'))) {
+        //         return response()->json(['user_not_found'], 404);
+        //     }
+
+        // } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+
+        //     return response()->json(['token_expired'], 500);
+
+        // } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+        //     return response()->json(['token_invalid'], 500);
+
+        // } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+        //     return response()->json(['token_absent' => $e->getMessage()], 500);
+
+        // }
+
+        // return response()->json(compact('token'));
     }
 
-    // protected function returnToken($token) {
-    //     return response()->json([
-    //         'data' => compact('token')
-    //     ])
-    // }
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => Auth::factory()->getTTL() * 60
+        ]);
+    }
+
 }
