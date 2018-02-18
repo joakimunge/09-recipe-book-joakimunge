@@ -1,7 +1,7 @@
 export class List {
   public id: number;
   public name: string;
-  public user: number;
+  public user: any;
   public recipes: string[];
 
   constructor(
