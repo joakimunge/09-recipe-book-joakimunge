@@ -9,13 +9,6 @@ import { AuthService } from '../auth.service';
 
 import { List } from '../../models/list.model';
 
-const httpOptions = { // Fix this so we dont try to set auth-bearer-token when logged out
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('currentUser')).access_token}`
-  })
-};
-
 @Injectable()
 export class ListService {
 
@@ -25,18 +18,26 @@ export class ListService {
   ) 
   { }
 
-  getLists(): Observable<List[]> {
-    return this.http.get<List[]>('http://dev.manchildman.com/lists', httpOptions)
+  getLists() {
+    return this.http.get<List[]>('http://dev.manchildman.com/lists', this.auth.setAuthHeaders())
     	.pipe(
-          catchError(this.errorHandler('getRecipes', []))
+          catchError(this.errorHandler('getLists', []))
         );
   }
 
-  getList(id: string): Observable<List[]> {
-  	return this.http.get<List[]>(`http://dev.manchildman.com/lists/${id}`, httpOptions)
+  getList(id: string) {
+  	return this.http.get<List[]>(`http://dev.manchildman.com/lists/${id}`, this.auth.setAuthHeaders())
     	.pipe(
-        catchError(this.errorHandler('getRecipes', []))
-      );
+        catchError(this.errorHandler('getList', []))
+    );
+  }
+
+  createList(name: string) {
+    return this.http.post<any>(`http://dev.manchildman.com/lists/store`, {name: name},this.auth.setAuthHeaders())
+  }
+
+  saveToList(list: number, recipe: string) {
+    return this.http.post<any>(`http://dev.manchildman.com/lists/save`, {list: list, recipe: recipe}, this.auth.setAuthHeaders())
   }
 
   private errorHandler<T> (operation = 'operation', result?: T) {
