@@ -1,11 +1,14 @@
 <nav>
-	<div *ngIf="!this.auth.isUserLoggedin()">
+	<button routerLink="/">Home</button>
+	<div *ngIf="!this.auth.isAuthenticated()">
 	<button routerLink="/login">Login</button>
 	<button routerLink="/register">Sign up</button>
 	</div>
-	<div *ngIf="this.auth.isUserLoggedin()">
+	<div *ngIf="this.auth.isAuthenticated()">
+		<button (click)="this.auth.getUser()">Who am i?</button>
+		<button routerLink="/lists">My lists</button>
+		<button routerLink="/lists/create">Create new list</button>
 		<button (click)="logout()">Log out</button>
-		<button (click)="this.auth.getUser()">USER INFO</button>
 	</div>
 </nav>
 <router-outlet></router-outlet>

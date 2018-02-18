@@ -4,6 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule } from '@angular/forms';
 
+import { RouterStateSnapshot } from '@angular/router';
+
+import { AuthGuardService as AuthGuard} from './auth-guard/auth-guard.service';
+
 import { RecipeService } from './recipe.service';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
@@ -18,6 +22,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { ListsComponent } from './lists/lists.component';
 import { ListService } from './shared/services/list.service';
 import { ListDetailComponent } from './list-detail/list-detail.component';
+import { ListCreateComponent } from './list-create/list-create.component';
 
 
 @NgModule({
@@ -29,7 +34,8 @@ import { ListDetailComponent } from './list-detail/list-detail.component';
     LoginComponent,
     RegisterComponent,
     ListsComponent,
-    ListDetailComponent
+    ListDetailComponent,
+    ListCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,8 @@ import { ListDetailComponent } from './list-detail/list-detail.component';
   providers: [
   	RecipeService,
     AuthService,
-    ListService
+    ListService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

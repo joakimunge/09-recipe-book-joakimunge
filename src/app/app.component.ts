@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from './shared/auth.service';
 
 @Component({
@@ -11,10 +11,6 @@ export class AppComponent {
 
   constructor(private auth: AuthService) {
 
-  }
-
-  ngOnInit() {
-  	// this.auth.isUserLoggedin();
   }
 
   logout() {
