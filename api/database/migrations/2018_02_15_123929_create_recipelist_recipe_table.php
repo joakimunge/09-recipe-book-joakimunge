@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListRecipeTable extends Migration
+class CreateRecipeListRecipeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ class CreateListRecipeTable extends Migration
     {
       Schema::create('recipelist_recipe', function(Blueprint $table)
       {
-          $table->integer('recipelist_id')->unsigned();
-          $table->foreign('recipelist_id')->references('id')
+          $table->integer('recipe_list_id')->unsigned();
+          $table->foreign('recipe_list_id')->references('id')
                 ->on('recipelists')->onDelete('cascade');
 
           $table->integer('recipe_id')->unsigned();
