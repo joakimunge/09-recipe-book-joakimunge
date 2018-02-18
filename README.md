@@ -4,17 +4,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # Todo:
 
-## Move api calls to backend
+## Fix live search
+- Look into error message: Cannot find a differ supporting object '[object Object]' of type 'object'.
+
+### Move api calls to backend (optional)
 - Create service provider
 - Make resource route
 - Make resource controller
 - Guzzle
 
-## Authguard
-- Make auth guard (CanActivate, isLoggedIn etc.)
-
-## HttpHeaders
-- refactor HttpHeaders
 
 ## Development server
 
