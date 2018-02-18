@@ -1,5 +1,9 @@
-<div>
+<div *ngIf="lists?.length > 0; else empty">
 	<ul>
 	    <li *ngFor="let list of lists"><a routerLink="/list/{{list.id}}">{{list.name}}</a></li>
 	</ul>
 </div>
+
+<ng-template #empty>
+	You have no lists yet! Why not <a routerLink="/lists/create">create one?</a>
+</ng-template>

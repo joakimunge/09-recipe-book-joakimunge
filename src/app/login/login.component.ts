@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    if(this.auth.isUserLoggedin()) {
+    if(this.auth.isAuthenticated()) {
       this.router.navigate(['/recipes']);
     }
   }

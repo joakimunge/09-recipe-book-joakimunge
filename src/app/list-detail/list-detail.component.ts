@@ -13,7 +13,7 @@ import { ListService } from '../shared/services/list.service';
 })
 export class ListDetailComponent implements OnInit {
 
-  lists: List[];
+  list: List;
 
   constructor(private listService: ListService, private route: ActivatedRoute) { }
 
@@ -25,17 +25,14 @@ export class ListDetailComponent implements OnInit {
   	const id = this.route.snapshot.paramMap.get('id');
   	this.listService.getList(id)
   		.subscribe(res => {
-  			console.log(res);
-  			debugger;
-        this.lists = res['list']
-          .map(list => new List(
-            list.id, 
-            list.name, 
-            list.user,
-            list.recipes
-            )
+        console.log(res);
+        this.list = new List(
+            res['list'].id, 
+            res['list'].name, 
+            res['user'],
+            res['list'].recipes
           );
-      });;
+      });
   }
 
 }
