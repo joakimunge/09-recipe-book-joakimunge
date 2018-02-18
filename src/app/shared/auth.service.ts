@@ -8,13 +8,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const httpOptions = { // Fix this so we dont try to set auth-bearer-token when logged out
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('currentUser')).access_token}`
-  })
-};
-
 @Injectable()
 export class AuthService {
 
@@ -23,6 +16,19 @@ export class AuthService {
   	private jwtHelper: JwtHelperService,
   	private router: Router
   ) { 
+  }
+
+  setAuthHeaders(): any {
+    if(!this.isAuthenticated()) {
+      return false;
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('currentUser')).access_token}`
+      })
+    };
+    return httpOptions;
   }
 
   login(email: string, password: string) {
@@ -46,17 +52,19 @@ export class AuthService {
   	return this.http.post<any>('http://dev.manchildman.com/register', {email: email, password: password});
   }
 
-  isUserLoggedin() {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    if (user && !this.jwtHelper.isTokenExpired(user.access_token)) {
-      return true;
-    } else {
+  isAuthenticated(): boolean {
+    if (!localStorage.getItem('currentUser')) {
       return false;
     }
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    return !this.jwtHelper.isTokenExpired(user.access_token);
   }
 
   getUser() {
-    return this.http.get<any>('http://dev.manchildman.com/lists', httpOptions)
+    if (!this.isAuthenticated()) {
+      return;
+    }
+    return this.http.get<any>('http://dev.manchildman.com/lists', this.setAuthHeaders())
       .subscribe(user => console.log(user));
   }
 
