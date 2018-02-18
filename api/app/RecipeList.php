@@ -14,8 +14,8 @@ class RecipeList extends Model {
     ];
 
     public function recipes() {
-		  return $this->belongsToMany('App\Recipe')
-		  ->withTimestamps();
+		  return $this->belongsToMany('App\Recipe', 'recipelist_recipe')
+		  	->withTimestamps();
     }
 
 }

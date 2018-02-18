@@ -12,9 +12,9 @@ class Recipe extends Model {
         'remote_id'
     ];
 
-    public function lists() {
-	    return $this->belongsToMany('App\List')
-	    ->withTimestamps();
+    public function recipelists() {
+	    return $this->belongsToMany('App\RecipeList', 'recipelist_recipe')
+	    	->withTimestamps();
     }
 
 }
