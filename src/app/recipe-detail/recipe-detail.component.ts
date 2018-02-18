@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
+
+import { List } from '../models/list.model';
+import { ListService } from '../shared/services/list.service';
+
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -13,15 +19,20 @@ export class RecipeDetailComponent implements OnInit {
 
   recipe: Recipe;
   recipeJson: string;
+  lists: List[];
+  model: any = {};
 
   constructor(
   	private recipeService: RecipeService,
   	private route: ActivatedRoute,
-  	private location: Location
+  	private location: Location,
+    private listService: ListService,
+    private auth: AuthService
   	) { }
 
   ngOnInit() {
   	this.getRecipe();
+    this.getLists();
   }
 
   getRecipe(): void {
@@ -39,7 +50,6 @@ export class RecipeDetailComponent implements OnInit {
           res.totalTime,
           res.rating
           )
-        console.log(this.recipe);
       });
   }
 
@@ -47,4 +57,25 @@ export class RecipeDetailComponent implements OnInit {
     this.location.back();
   }
 
+  saveToList() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.listService.saveToList(this.model.list, id)
+      .subscribe(res => console.log(res));
+  }
+
+  getLists(): void {
+    this.listService.getLists()
+      .subscribe(res => {
+        this.lists = res['lists']
+          .map(list => new List(
+            list.id, 
+            list.name, 
+            list.user
+            )
+          );
+      });
+  }
+
 }
+
+

@@ -9,4 +9,16 @@
 	<p>{{recipe.rating}}</p>
 </div>
 <button (click)="goBack()">Back</button>
-<button (click)="addToList()">Add..</button>
+<div *ngIf="this.auth.isAuthenticated()" class="container">
+  <h1>Create new list</h1>
+  <form (ngSubmit)="saveToList()" #addToListForm="ngForm">
+    <div class="form-group">
+      <label for="list">Select a list</label>
+      <select name="list" id="list" name="list" #list="ngModel" [(ngModel)]="model.list" required>
+			  <option *ngFor="let list of lists" value="{{list.id}}">{{list.name}} {{list.id}}</option> 
+			</select>
+    </div>
+    <button type="submit" class="btn btn-success">Add to list</button>
+  </form>
+</div>
+
