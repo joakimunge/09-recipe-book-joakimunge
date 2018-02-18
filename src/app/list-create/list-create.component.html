@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>Create new list</h1>
+  <form (ngSubmit)="onSubmit()" #createListForm="ngForm">
+    <div class="form-group">
+      <label for="name">List name</label>
+      <input type="text" class="form-control" id="name" #name="ngModel" [(ngModel)]="model.name" required name="name">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
