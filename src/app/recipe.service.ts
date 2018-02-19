@@ -38,11 +38,11 @@ export class RecipeService {
     if (!term.trim()) {
       return of([]);
     }
-    const data = this.http.get<Recipe[]>(this.searchUrl + term);
-    console.log(data['matches'])
-    return data.pipe(
-      catchError(this.errorHandler<Recipe[]>('searchHeroes', []))
-    );
+    return this.http.get<Recipe[]>(this.searchUrl + term)
+      .pipe(
+        tap(_ => console.log(`found recipes matching "${term}"`)),
+        catchError(this.errorHandler<Recipe[]>('searchRecipes', []))
+       );
   }
 
   private errorHandler<T> (operation = 'operation', result?: T) {

@@ -20,7 +20,7 @@ export class RecipeSearchComponent implements OnInit {
 
   ngOnInit(): void {
   	this.recipes$ = this.searchTerms.pipe(
-  		debounceTime(400),
+  		debounceTime(800),
   		distinctUntilChanged(),
   		switchMap((term: string) => this.recipeService.search(term))
   	);

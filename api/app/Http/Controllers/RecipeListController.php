@@ -30,11 +30,14 @@ class RecipeListController extends Controller
     public function store(Request $request) {
 
         try {
-            $list = new RecipeList;
+
             $user = Auth::user();
+
+            $list = new RecipeList;
             $list->name = $request->name;
             $list->user_id = $user->id;
             $list->save();
+
             return response([
                 'status' => 'success',
                 'user' => Auth::user(),
