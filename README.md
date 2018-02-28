@@ -6,15 +6,6 @@ Will be deployed here asap: http://joakimunge.chas.academy/09
 # Todo:
 - Deploy
 
-## Fix live search
-- Look into error message: Cannot find a differ supporting object '[object Object]' of type 'object'.
-
-### Move api calls to backend (optional)
-- Create service provider
-- Make resource route
-- Make resource controller
-- Guzzle
-
 
 
 
