@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-  	return this.http.post<any>('http://dev.manchildman.com/login', {email: email, password: password}).pipe(
+  	return this.http.post<any>('http://weegan.lanayru.me/login', {email: email, password: password}).pipe(
 	  		map(user => {
 	  			if (user && user.access_token) {
 	  				localStorage.setItem('currentUser', JSON.stringify(user))
@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   register(email: string, password: string) {
-  	return this.http.post<any>('http://dev.manchildman.com/register', {email: email, password: password});
+  	return this.http.post<any>('http://weegan.lanayru.me/register', {email: email, password: password});
   }
 
   isAuthenticated(): boolean {
@@ -64,7 +64,7 @@ export class AuthService {
     if (!this.isAuthenticated()) {
       return;
     }
-    return this.http.get<any>('http://dev.manchildman.com/lists', this.setAuthHeaders())
+    return this.http.get<any>('http://weegan.lanayru.me/lists', this.setAuthHeaders())
       .subscribe(user => console.log(user));
   }
 

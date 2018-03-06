@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../shared/auth.service';
 
 @Component({
@@ -11,7 +13,7 @@ export class RegisterComponent implements OnInit {
 	model: any = {};
 	submitted = false;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -19,7 +21,9 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
   	this.submitted = true;
   	this.auth.register(this.model.email, this.model.password)
-      .subscribe(res => console.log(res));
+      .subscribe(res => {
+        this.router.navigate(['/recipes']);
+      });
   }
 
 

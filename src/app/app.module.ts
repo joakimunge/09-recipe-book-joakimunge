@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { FormsModule } from '@angular/forms';
 
 import { RouterStateSnapshot } from '@angular/router';
@@ -24,6 +24,16 @@ import { ListService } from './shared/services/list.service';
 import { ListDetailComponent } from './list-detail/list-detail.component';
 import { ListCreateComponent } from './list-create/list-create.component';
 
+export function jwtOptionsFactory() {
+  return {
+    tokenGetter: () => {
+      return localStorage.getItem('access_token') ? localStorage.getItem('access_token') : null;
+    },
+      whitelistedDomains: ['weegan.lanayru.me'],
+      skipWhenExpired: true
+  };
+} 
+
 
 @NgModule({
   declarations: [
@@ -43,12 +53,10 @@ import { ListCreateComponent } from './list-create/list-create.component';
     AppRoutingModule,
     FormsModule,
     JwtModule.forRoot({
-      config: {
-        tokenGetter: () => {
-          return localStorage.getItem('access_token');
-        },
-        whitelistedDomains: ['dev.manchildman.com']
-      }
+        jwtOptionsProvider: {
+          provide: JWT_OPTIONS,
+          useFactory: jwtOptionsFactory
+        }
     })
   ],
   providers: [

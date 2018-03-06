@@ -27,7 +27,7 @@ export class RecipeDetailComponent implements OnInit {
   	private route: ActivatedRoute,
   	private location: Location,
     private listService: ListService,
-    private auth: AuthService
+    public auth: AuthService
   	) { }
 
   ngOnInit() {

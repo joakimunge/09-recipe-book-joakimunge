@@ -19,25 +19,25 @@ export class ListService {
   { }
 
   getLists() {
-    return this.http.get<List[]>('http://dev.manchildman.com/lists', this.auth.setAuthHeaders())
+    return this.http.get<List[]>('http://weegan.lanayru.me/lists', this.auth.setAuthHeaders())
     	.pipe(
           catchError(this.errorHandler('getLists', []))
         );
   }
 
   getList(id: string) {
-  	return this.http.get<List[]>(`http://dev.manchildman.com/lists/${id}`, this.auth.setAuthHeaders())
+  	return this.http.get<List[]>(`http://weegan.lanayru.me/lists/${id}`, this.auth.setAuthHeaders())
     	.pipe(
         catchError(this.errorHandler('getList', []))
     );
   }
 
   createList(name: string) {
-    return this.http.post<any>(`http://dev.manchildman.com/lists/store`, {name: name},this.auth.setAuthHeaders())
+    return this.http.post<any>(`http://weegan.lanayru.me/lists/store`, {name: name},this.auth.setAuthHeaders())
   }
 
   saveToList(list: number, recipe: string) {
-    return this.http.post<any>(`http://dev.manchildman.com/lists/save`, {list: list, recipe: recipe}, this.auth.setAuthHeaders())
+    return this.http.post<any>(`http://weegan.lanayru.me/lists/save`, {list: list, recipe: recipe}, this.auth.setAuthHeaders())
   }
 
   private errorHandler<T> (operation = 'operation', result?: T) {
