@@ -1,7 +1,9 @@
-<div *ngIf="list.recipes?.length > 0; else empty">
-	<h1>{{list.name}}</h1>
-	<h3>Created by: {{list.user.email}}</h3>
-	<p *ngFor="let recipe of list.recipes">{{recipe.remote_id}}</p>
+<div *ngIf="list">
+	<div *ngIf="list.recipes?.length > 0; else empty">
+		<h1>{{list.name}}</h1>
+		<h3>Created by: {{list.user.email}}</h3>
+		<p *ngFor="let recipe of list.recipes">{{recipe.remote_id}}</p>
+	</div>
 </div>
 <ng-template #empty>
 	This list is empty :()

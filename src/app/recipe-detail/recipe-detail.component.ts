@@ -40,6 +40,7 @@ export class RecipeDetailComponent implements OnInit {
   	this.recipeService.getRecipe(id)
   		.subscribe(res => {
         this.recipeJson = JSON.stringify(res, null, 2)
+        console.log(res);
         this.recipe = new Recipe(
           res.id, 
           res['images'][0]['hostedMediumUrl'], 

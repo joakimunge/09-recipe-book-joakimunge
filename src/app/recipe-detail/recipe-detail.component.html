@@ -1,12 +1,24 @@
 <div *ngIf="recipe">
 	<p>{{recipe.id}}</p>
 	<p>{{recipe.title}}</p>
-	<p>{{recipe.image}}</p>
-	<p>{{recipe.ingredients}}</p>
-	<p>{{recipe.source}}</p>
-	<p>{{recipe.servings}}</p>
-	<p>{{recipe.totalTime}}</p>
-	<p>{{recipe.rating}}</p>
+	<img src="{{recipe.image}}">
+	<p>Ingredients:</p>
+	<ul>
+		<li *ngFor="let ingredient of recipe.ingredients" >
+			{{ingredient}}
+		</li>
+	</ul>
+	<p>Total servings: {{recipe.servings}}</p>
+	<p>Total time: {{recipe.totalTime}}</p>
+	<p>Avg rating: {{recipe.rating}}</p>
+	<ul>
+		<li>
+			<p>Recipe source: {{recipe.source.sourceDisplayName}}</p>
+		</li>
+		<li>
+			<p>Source url: <a href="{{recipe.source.sourceRecipeUrl}}">{{recipe.source.sourceRecipeUrl}}</a></p>
+		</li>
+	</ul>
 </div>
 <button (click)="goBack()">Back</button>
 <div *ngIf="this.auth.isAuthenticated()" class="container">
