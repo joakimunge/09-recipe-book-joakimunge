@@ -1,17 +1,14 @@
 # Weegan
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+Currently not deployed due to unexpected issues with lumen.
+Will be deployed here asap: http://joakimunge.chas.academy/09
 
 # Todo:
+- Deploy
 
-## Fix live search
-- Look into error message: Cannot find a differ supporting object '[object Object]' of type 'object'.
 
-### Move api calls to backend (optional)
-- Create service provider
-- Make resource route
-- Make resource controller
-- Guzzle
+
+
 
 
 ## Development server
