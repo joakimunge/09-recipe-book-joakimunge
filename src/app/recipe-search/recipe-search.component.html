@@ -1,7 +1,26 @@
 <div id="search-component">
   <h4>Recipe Search</h4>
-
-  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  <form (ngSubmit)="onSubmit(searchBox.value)">
+    <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+    <div>
+      <input type="hidden" name="toggle" [(ngModel)]="filters">
+      <div>
+          <label>
+              <input type="checkbox" [checked]="filters[0].toggled === toggles[0].value" (change)="$event.target.checked? (filters[0].toggled = toggles[0].value) : (filters[0].toggled = toggles[1].value)">
+              Appetizers
+          </label>
+          <label>
+              <input type="checkbox" [checked]="filters[1].toggled === toggles[0].value" (change)="$event.target.checked? (filters[1].toggled = toggles[0].value) : (filters[1].toggled = toggles[1].value)">
+              Entrées
+          </label>
+          <label>
+              <input type="checkbox" [checked]="filters[2].toggled === toggles[0].value" (change)="$event.target.checked? (filters[2].toggled = toggles[0].value) : (filters[2].toggled = toggles[1].value)">
+              Desserts 
+          </label>
+      </div>
+    </div>
+    <button type="submit">Search</button>
+  </form>
   <div *ngIf="recipes$">
   	<ul class="search-result"> 
       <li *ngFor="let recipe of (recipes$ | async)?.matches">

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
 
@@ -10,16 +12,18 @@ import { Recipe } from '../recipe.model';
 export class RecipesComponent implements OnInit {
 
 	recipes: Recipe[];
+  defaultQuery = 'pasta';
 
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
-  	this.getRecipes();
+  	this.getRecipes(this.defaultQuery);
   }
 
-  getRecipes(): void {
-  	this.recipeService.getRecipes()
+  getRecipes(term: string): void {
+  	this.recipeService.getRecipes(term)
   		.subscribe(recipes => {
+        console.log(recipes)
         this.recipes = recipes['matches']
           .map(recipe => new Recipe(
             recipe.id, 
