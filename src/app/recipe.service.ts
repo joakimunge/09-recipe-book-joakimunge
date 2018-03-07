@@ -26,7 +26,6 @@ export class RecipeService {
 
   getRecipes(term: string = this.params.query): Observable<Recipe[]> {
     this.params.query = term;
-    console.log(this.recipesUrl + this.params.query);
   	this.recipes = this.http.get<Recipe[]>(this.recipesUrl + this.params.query)
       .pipe(
           catchError(this.errorHandler('getRecipes', []))
